@@ -56,7 +56,7 @@ def mod_embed(result: bs4.BeautifulSoup) -> discord.Embed:
     for tag in footer.find_all("a", class_="slot-button-inline"):
         taglist.append(f"[{tag.string.strip()}](https://mods.factorio.com{tag['href']})")
     gameVersions = infoCard.find("div", title="Available for these Factorio versions").contents[2].strip()
-    downloads = infoCard.find("div", title="Downloads, updated daily").contents[2].strip()
+    downloads = infoCard.find("div", title="Downloads, updated daily").text.strip()
     createdAtDiv = infoCard.find("div", title="Last updated")
     createdAt = createdAtDiv.find("span").contents[0].strip()
     fields.extend([{"name": "Category", "value": "None" if len(taglist) == 0 else ", ".join(taglist)},
